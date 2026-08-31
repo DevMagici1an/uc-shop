@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODEX UC SHOP — Выберите услугу</title>
+    <!-- Подключаем шрифт Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Orbitron', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        pubg: {
+                            red: '#990000',
+                            redHover: '#cc0000',
+                            redBright: '#ff1a1a',
+                            dark: '#0B0C10',
+                            card: '#14161D',
+                            border: '#262933'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-pubg-dark text-gray-100 font-sans min-h-screen flex flex-col justify-between selection:bg-pubg-red selection:text-white">
+
+    <!-- Header -->
+    <header class="border-b border-pubg-border bg-pubg-card/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="font-heading text-2xl font-black tracking-wider text-pubg-redBright drop-shadow-[0_0_10px_rgba(255,26,26,0.3)]">CODEX UC SHOP</span>
+            </div>
+            <a href="https://t.me/" target="_blank" class="text-sm font-semibold text-gray-400 hover:text-pubg-redBright transition">
+                Поддержка Telegram
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl w-full mx-auto px-4 py-12 space-y-8">
+        <div class="text-center space-y-3">
+            <h1 class="font-heading text-3xl sm:text-4xl font-black uppercase tracking-wider text-white">Выберите нужную услугу</h1>
+            <p class="text-gray-400 text-sm sm:text-base max-w-lg mx-auto">Пополнение UC и покупка эксклюзивных суперкаров с быстрой доставкой по ID</p>
+        </div>
+
+        <!-- Карточки выбора услуг -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+            
+            <!-- Услуга 1: UC -->
+            <a href="uc.html" class="group bg-pubg-card border-2 border-pubg-border hover:border-pubg-redBright p-8 rounded-3xl transition duration-300 flex flex-col justify-between hover:scale-[1.02] shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-pubg-red/20 blur-3xl rounded-full group-hover:bg-pubg-red/40 transition"></div>
+                <div class="space-y-4 relative z-10">
+                    <div class="w-16 h-16 bg-pubg-red/15 text-pubg-redBright border border-pubg-red/40 rounded-2xl flex items-center justify-center text-3xl group-hover:bg-pubg-red group-hover:text-white transition duration-300 shadow-lg">
+                        💎
+                    </div>
+                    <h2 class="font-heading text-2xl font-bold text-white group-hover:text-pubg-redBright transition">Пополнение UC</h2>
+                    <p class="text-sm text-gray-400 leading-relaxed">Моментальное зачисление валюты Unknown Cash по вашему Player ID. Паки от 60 до 6000+ UC.</p>
+                </div>
+                <div class="mt-8 flex items-center text-pubg-redBright font-heading font-bold text-sm tracking-wide relative z-10">
+                    Перейти к покупке <span class="ml-2 group-hover:translate-x-2 transition">→</span>
+                </div>
+            </a>
+
+            <!-- Услуга 2: Суперкары -->
+            <a href="cars.html" class="group bg-pubg-card border-2 border-pubg-border hover:border-pubg-redBright p-8 rounded-3xl transition duration-300 flex flex-col justify-between hover:scale-[1.02] shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-pubg-red/20 blur-3xl rounded-full group-hover:bg-pubg-red/40 transition"></div>
+                <div class="space-y-4 relative z-10">
+                    <div class="w-16 h-16 bg-pubg-red/15 text-pubg-redBright border border-pubg-red/40 rounded-2xl flex items-center justify-center text-3xl group-hover:bg-pubg-red group-hover:text-white transition duration-300 shadow-lg">
+                        🏎️
+                    </div>
+                    <h2 class="font-heading text-2xl font-bold text-white group-hover:text-pubg-redBright transition">Суперкары PUBG</h2>
+                    <p class="text-sm text-gray-400 leading-relaxed">Покупка лимитированных автомобилей и скинов (Lamborghini, Dodge, Bugatti, Koenigsegg).</p>
+                </div>
+                <div class="mt-8 flex items-center text-pubg-redBright font-heading font-bold text-sm tracking-wide relative z-10">
+                    Перейти в автосалон <span class="ml-2 group-hover:translate-x-2 transition">→</span>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-pubg-border py-6 text-center text-xs text-gray-500 font-sans">
+        <p>© 2026 CODEX UC SHOP. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

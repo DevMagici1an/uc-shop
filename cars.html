@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Суперкары — CODEX UC SHOP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Orbitron', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        pubg: {
+                            red: '#990000',
+                            redHover: '#cc0000',
+                            redBright: '#ff1a1a',
+                            dark: '#0B0C10',
+                            card: '#14161D',
+                            border: '#262933'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-pubg-dark text-gray-100 font-sans min-h-screen flex flex-col justify-between">
+
+    <header class="border-b border-pubg-border bg-pubg-card/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-sm font-bold text-gray-400 hover:text-pubg-redBright flex items-center gap-2 transition">
+                ← На главную
+            </a>
+            <span class="font-heading text-lg font-bold text-pubg-redBright uppercase tracking-wider">CODEX UC SHOP</span>
+        </div>
+    </header>
+
+    <main class="max-w-4xl w-full mx-auto px-4 py-8 space-y-6">
+        <!-- Шаг 1 -->
+        <section class="bg-pubg-card border border-pubg-border p-6 rounded-2xl shadow-xl">
+            <h2 class="font-heading text-lg font-bold mb-4 text-white tracking-wide">1. Введите Player ID</h2>
+            <input type="text" id="playerId" placeholder="Например: 5123456789" class="w-full bg-pubg-dark border border-pubg-border rounded-xl px-4 py-3 text-lg text-white font-mono focus:outline-none focus:border-pubg-redBright transition" oninput="validate()">
+        </section>
+
+        <!-- Шаг 2 -->
+        <section class="bg-pubg-card border border-pubg-border p-6 rounded-2xl shadow-xl">
+            <h2 class="font-heading text-lg font-bold mb-4 text-white tracking-wide">2. Выберите модель суперкара</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4" id="carGrid"></div>
+        </section>
+
+        <!-- Итог -->
+        <section class="bg-pubg-card border border-pubg-border p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+            <div>
+                <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold">К оплате:</div>
+                <div class="font-heading text-3xl font-black text-pubg-redBright" id="totalPrice">0 ₽</div>
+            </div>
+            <button id="submitBtn" class="w-full sm:w-auto px-10 py-4 bg-pubg-red text-white font-heading font-bold rounded-xl text-lg hover:bg-pubg-redHover disabled:opacity-40 disabled:hover:bg-pubg-red transition duration-200 shadow-lg shadow-pubg-red/20" disabled>
+                Заказать машинку
+            </button>
+        </section>
+    </main>
+
+    <!-- Модалка -->
+    <div id="modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="bg-pubg-card border border-pubg-border p-6 rounded-2xl max-w-md w-full text-center space-y-4 shadow-2xl">
+            <div class="text-4xl">🏎️</div>
+            <h3 class="font-heading text-xl font-bold text-white">Заказ принят!</h3>
+            <p class="text-gray-300 text-sm">Данные автомобиля и ваш Player ID отправлены менеджеру.</p>
+            <a id="tgPayLink" href="#" target="_blank" class="block w-full py-3 bg-pubg-red text-white font-heading font-bold rounded-xl hover:bg-pubg-redHover transition">
+                Перейти в Telegram
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const cars = [
+            { id: 1, name: 'Dodge Challenger', price: 3500 },
+            { id: 2, name: 'Lamborghini Aventador', price: 4200 },
+            { id: 3, name: 'Aston Martin Valkyrie', price: 4800 },
+            { id: 4, name: 'Bugatti Voiture Noire', price: 5500 },
+            { id: 5, name: 'Koenigsegg Gemera', price: 6000 },
+            { id: 6, name: 'Pagani Imola', price: 6500 }
+        ];
+        let selected = null;
+        let idVal = '';
+
+        const grid = document.getElementById('carGrid');
+        grid.innerHTML = cars.map(c => `
+            <div onclick="selectCar(${c.id}, this)" class="car border-2 border-pubg-border bg-pubg-dark p-4 rounded-xl text-center cursor-pointer hover:border-pubg-redBright transition group">
+                <div class="font-heading text-base font-bold text-white group-hover:text-pubg-redBright transition">${c.name}</div>
+                <div class="text-gray-400 font-semibold text-sm mt-1">${c.price} ₽</div>
+            </div>
+        `).join('');
+
+        function selectCar(id, el) {
+            document.querySelectorAll('.car').forEach(e => {
+                e.classList.remove('border-pubg-redBright', 'bg-pubg-red/10');
+                e.classList.add('border-pubg-border');
+            });
+            el.classList.remove('border-pubg-border');
+            el.classList.add('border-pubg-redBright', 'bg-pubg-red/10');
+            selected = cars.find(c => c.id === id);
+            validate();
+        }
+
+        function validate() {
+            idVal = document.getElementById('playerId').value.replace(/\D/g, '');
+            document.getElementById('playerId').value = idVal;
+            const valid = idVal.length >= 7 && selected !== null;
+            document.getElementById('totalPrice').innerText = selected ? `${selected.price} ₽` : '0 ₽';
+            document.getElementById('submitBtn').disabled = !valid;
+        }
+
+        async function sendOrder() {
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = 'Обработка...';
+
+            try {
+                const res = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ player_id: idVal, item_name: selected.name, price: selected.price, category: 'car' })
+                });
+
+                if (res.ok) {
+                    document.getElementById('modal').classList.remove('hidden');
+                } else {
+                    alert('Ошибка при оформлении заказа');
+                }
+            } catch (err) {
+                alert('Не удалось связаться с сервером');
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'Заказать машинку';
+            }
+        }
+
+        document.getElementById('submitBtn').onclick = sendOrder;
+    </script>
+</body>
+</html>
